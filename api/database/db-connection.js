@@ -1,13 +1,14 @@
+/* Set up */
 require('dotenv').config();
 const mongoose = require('mongoose');
 
+/* Database connection */
 const db = mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
-  useCreateIndex: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false
-}, error => {
-  return error ? console.warn(err.bgRed) : console.log('[MongoDB] connected to database \u2713 '.bgGreen);
-});
+  useUnifiedTopology: true
+})
+  .then(db => console.log('[MongoDB] connected to database \u2713 '.bgGreen))
+  .catch(error => console.warn(error.bgRed));
 
+/* Exports */
 module.exports = db;
